@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, session, request, jsonify, render_template
+from flask import Flask, redirect, url_for, session, request, render_template
 from authlib.integrations.flask_client import OAuth
 from dotenv import load_dotenv
 import os
@@ -8,8 +8,8 @@ load_dotenv()
 app = Flask(__name__)
 app.debug = True
 app.secret_key = 'development'
-oauth = OAuth(app)
 
+oauth = OAuth(app)
 oauth.register(
     name='suap',
     client_id=os.getenv("CLIENT_ID"),
@@ -21,6 +21,9 @@ oauth.register(
     authorize_url='https://suap.ifrn.edu.br/o/authorize/',
     fetch_token=lambda: session.get('suap_token')
 )
+
+def is_logged_in():
+    return 'suap_token' in session
 
 class User:
     def __init__(self, oauth):
@@ -35,18 +38,19 @@ class User:
     def get_periodos(self):
         return self.oauth.suap.get("v2/minhas-informacoes/meus-periodos-letivos/").json()
 
+
 @app.route('/')
 def index():
-    if 'suap_token' in session:
-        meus_dados = oauth.suap.get('v2/minhas-informacoes/meus-dados')
-        return render_template('user.html', user=meus_dados.json())
+    if is_logged_in():
+        suap_user = User(oauth)
+        user_data = suap_user.get_user_data()
+        return render_template('user.html', user=user_data)
     else:
         return render_template('index.html')
 
-
 @app.route("/boletim/", methods=["GET", "POST"])
 def boletim():
-    if not oauth.suap.authorized:
+    if not is_logged_in():
         return redirect(url_for('login'))
 
     suap_user = User(oauth)
@@ -64,26 +68,25 @@ def boletim():
 
     return render_template("boletim.html", user=user, boletim_data=boletim, periodos=periodos, selected_periodo=periodo)
 
-
 @app.route('/login')
 def login():
     redirect_uri = url_for('auth', _external=True)
-    print(redirect_uri)
     return oauth.suap.authorize_redirect(redirect_uri)
-
 
 @app.route('/logout')
 def logout():
     session.pop('suap_token', None)
     return redirect(url_for('index'))
 
-
 @app.route('/login/authorized')
 def auth():
     try:
         token = oauth.suap.authorize_access_token()
+        session['suap_token'] = token
     except Exception as e:
         return f"Erro na autenticação: {str(e)}"
     
-    session['suap_token'] = token
     return redirect(url_for('index'))
+
+if __name__ == "__main__":
+    app.run()
