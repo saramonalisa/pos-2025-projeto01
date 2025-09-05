@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}Cliente SUAP{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  </head>
+  <body class="bg-light" style="font-family: 'Poppins', sans-serif">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container position-relative">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuV10" aria-controls="menuV10" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="navbar-brand mx-auto position-absolute top-50 start-50 translate-middle fw-bold" href="#">Cliente SUAP</a>
+
+        <div class="collapse navbar-collapse justify-content-between" id="menuV10">
+          {% if user %}
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link {% if request.path == url_for('index') %}active{% endif %}" href="{{ url_for('index') }}">Perfil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if request.path == url_for('boletim') %}active{% endif %}" href="{{ url_for('boletim') }}">Boletins</a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center ms-auto">
+            <span class="navbar-text text-white me-2 text-nowrap">
+              {{ user.nome_usual }} ({{ user.matricula }})
+            </span>
+            <img src="{{ user.avatar_url or user.avatar or user.url_foto_150x200 }}" alt="avatar" width="35" height="35" class="rounded-circle me-2"/>
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-light">Sair</a>
+          </div>
+          {% else %}
+          <div class="d-flex ms-auto">
+            <a href="{{ url_for('login') }}" class="btn btn-outline-light">Login</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+
+    <main class="container min-vh-100 d-flex justify-content-center align-items-start py-5">
+      <div class="w-100" style="max-width: 80%">
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+
+    <footer class="bg-dark text-white py-4">
+      <p class="text-center fw-bold border-bottom border-secondary pb-3 mb-3">
+        INFOWEB 4M - Maria Clara, Sara Monalisa
+      </p>
+      <p class="text-center mb-0">© 2025 IFRN SPP</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
