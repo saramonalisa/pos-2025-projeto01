@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Perfil - {{ user.nome_usual }}
+{% endblock %}
+
+{% block content %}
+<div class="w-100 mx-auto" style="max-width: 1000px;">
+  <h2 class="mb-4">Informações do Perfil</h2>
+
+  <div class="card shadow-sm p-4">
+    <div class="row g-4">
+      
+      <div class="col-md-4 d-flex flex-column align-items-center position-relative">
+        <img src="{{ user.avatar_url or user.avatar or user.url_foto_150x200 }}" alt="avatar" class="img-fluid rounded" style="width: 180px; height: 240px; object-fit: cover;" />
+        <a href="{{ url_for('boletim') }}" class="btn btn-primary" style="margin-top: 4rem;">Visualizar Boletim</a>
+      </div>
+
+      <div class="col-md-8 d-flex flex-column justify-content-between ps-md-4">
+        <div class="mb-4">
+          <h5 class="border-bottom pb-2 fw-semibold">Pessoal</h5>
+          <ul class="list-unstyled fs-6">
+            <li class="mb-2"><strong>Nome completo:</strong> {{ user.vinculo.nome }}</li>
+            <li class="mb-2"><strong>CPF:</strong> {{ user.cpf }}</li>
+            <li class="mb-2"><strong>Data de nascimento:</strong> {{ user.data_nascimento }}</li>
+            <li class="mb-2"><strong>Email:</strong> {{ user.email }}</li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="border-bottom pb-2 fw-semibold">Acadêmico</h5>
+          <ul class="list-unstyled fs-6">
+            <li class="mb-2"><strong>Matrícula:</strong> {{ user.matricula }}</li>
+            <li class="mb-2"><strong>Curso:</strong> {{ user.vinculo.curso }}</li>
+            <li class="mb-2"><strong>Turno:</strong> {{ user.vinculo.turno }}</li>
+            <li class="mb-2"><strong>Campus:</strong> {{ user.vinculo.campus }}</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
