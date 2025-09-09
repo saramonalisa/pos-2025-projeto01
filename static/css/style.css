@@ -1,0 +1,302 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Paleta de cores */
+:root {
+  --text-color: #fff;
+  --bg-color: #1b1f24;
+  --second-bg-color: #22282f;
+  --main-color: #13bbff;
+  --other-color: #c3cad5;
+}
+
+/* Corpo */
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  background: transparent !important;
+  transition: all .5s ease;
+}
+.navbar.sticky {
+  background: var(--bg-color) !important;
+  box-shadow: 0 .1rem 1rem rgba(0,0,0,.2);
+}
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--text-color) !important;
+}
+.navbar-brand span { color: var(--main-color); }
+.nav-link {
+  color: var(--other-color) !important;
+  transition: all .3s ease;
+}
+.nav-link:hover {
+  color: var(--main-color) !important;
+  text-shadow: 0 0 10px var(--main-color);
+}
+.nav-link.active {
+  color: var(--main-color) !important;
+  font-weight: 700;
+  text-shadow: none !important;
+}
+
+/* Botões */
+.btn, .btn-outline-light, button, input[type="submit"] {
+  padding: 9px 22px;
+  border: 2px solid var(--main-color) !important;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--main-color) !important;
+  background: transparent !important;
+  transition: all .3s ease;
+  cursor: pointer;
+}
+.btn:hover, .btn-outline-light:hover, button:hover, input[type="submit"]:hover {
+  background: var(--main-color) !important;
+  color: var(--bg-color) !important;
+  box-shadow: 0 0 5px var(--main-color);
+  transform: scale(1.05);
+}
+
+/* Cards */
+.card {
+  background: #2d343f !important;
+  color: var(--text-color) !important;
+  border-radius: 20px;
+  border: 1px solid var(--main-color);
+  position: relative;
+  z-index: 1;
+}
+
+.card h1 { 
+  font-size: 2rem; 
+  font-weight: 700; 
+  color: var(--text-color); 
+  margin-bottom: 1rem; 
+} 
+.card h1 .text-primary { 
+  color: var(--main-color); 
+} 
+.card p { font-size: 1.1rem; 
+  color: var(--text-color); 
+  margin-bottom: 1.5rem; 
+}
+
+.card h5 { 
+  color: var(--main-color); 
+} 
+
+.card img {
+  border-radius: 0.5rem;
+  border: 1px solid var(--main-color);
+}
+
+.login-card {
+  background: #2d343f;
+  border: 1px solid var(--main-color);
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding: 3rem;
+  width: 70%;
+  margin-top: 5vh;
+}
+
+.login-card h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+.login-card h1 span {
+  color: var(--main-color);
+}
+
+.login-card p {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+.login-card .btn-login {
+  width: 40%;
+  display: block;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.login-card .btn-login:hover {
+  box-shadow: 0 0 5px var(--main-color);
+  transform: scale(1.03);
+}
+
+.login-shadow-blue1,
+.login-shadow-blue2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  z-index: 0;
+  pointer-events: none;
+}
+.login-shadow-blue1 {
+  width: 350px;
+  height: 350px;
+  background: rgba(19,187,255,0.15);
+  top: -60px;
+  left: -40px;
+  animation: floatBlue1 8s ease-in-out infinite;
+}
+.login-shadow-blue2 {
+  width: 250px;
+  height: 250px;
+  background: rgba(13,119,220,0.12);
+  bottom: -50px;
+  right: -70px;
+  animation: floatBlue2 10s ease-in-out infinite;
+}
+
+@keyframes floatBlue1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(10px, 10px); }
+}
+@keyframes floatBlue2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-8px, -12px); }
+}
+
+/* Form select */ 
+form select.form-select { 
+  background: #2d343f; 
+  color: var(--text-color); 
+  border: 2px solid var(--main-color); 
+  border-radius: 8px; padding: 8px 32px 8px 12px; 
+  appearance: none; 
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2210%22%20height%3D%227%22%20viewBox%3D%220%200%2010%207%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M0%200l5%207%205-7H0z%22%20fill%3D'%23c3cad5'/%3E%3C/svg%3E"); 
+  background-repeat: no-repeat; 
+  background-position: right 12px center; 
+  background-size: 10px 7px; cursor: pointer; 
+  transition: all .3s ease; 
+} 
+form select.form-select:hover, 
+form select.form-select:focus { 
+  outline: none; 
+  box-shadow: 0 0 5px var(--main-color); 
+}
+
+/* Tabela */
+.table-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.dark-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #2d343f;
+  color: var(--text-color);
+  border: 1px solid var(--main-color);
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.dark-table th, .dark-table td {
+  border: 1px solid var(--main-color);
+  padding: 6px 4px;
+  vertical-align: middle;
+  background-color: #2d343f;
+  color: var(--other-color);
+  text-align: center;
+}
+.dark-table thead th {
+  background-color: #1b1f24;
+  color: var(--main-color);
+  font-weight: 600;
+  padding: 8px 4px;
+  font-size: 0.9rem;
+}
+
+.dark-table thead tr:first-child th:first-child {
+  border-top-left-radius: 20px;
+}
+.dark-table thead tr:first-child th:last-child {
+  border-top-right-radius: 20px;
+}
+.dark-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 20px;
+}
+.dark-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 20px;
+}
+
+.th-inner {
+  border-radius: 0 !important;
+}
+
+.dark-table tbody tr:hover {
+  background-color: #2d343f;
+}
+.dark-table td.text-start {
+  text-align: left;
+  white-space: normal;
+  width: 18%;
+  font-size: 0.85rem;
+  padding: 6px 8px;
+}
+
+.table-aprovado {
+  background-color: rgba(19, 187, 255, 0.2) !important;
+  color: var(--text-color) !important;
+  font-weight: 600;
+}
+.table-reprovado {
+  background-color: rgba(255, 19, 19, 0.2) !important;
+  color: var(--text-color) !important;
+  font-weight: 600;
+}
+
+@media (max-width: 1000px) {
+  .table-container { 
+    overflow-x: auto; 
+    max-width: 100%;
+    padding: 0 10px;
+  }
+  
+  .dark-table {
+    min-width: 950px;
+    font-size: 0.8rem;
+  }
+  
+  .dark-table th, .dark-table td {
+    padding: 5px 3px;
+  }
+  
+  .dark-table td.text-start {
+    font-size: 0.8rem;
+    width: 20%;
+  }
+}
+
+/* Footer */
+footer {
+  background: var(--second-bg-color);
+  color: var(--other-color);
+}
+
+footer p:last-child {
+  color: var(--main-color);
+}
